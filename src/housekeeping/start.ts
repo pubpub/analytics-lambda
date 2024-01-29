@@ -1,4 +1,4 @@
-import { ScheduledEvent } from 'aws-lambda'
-import { handler } from './handler'
+import { ScheduledEvent } from 'aws-lambda';
+import { handler } from './handler';
 
-handler({} as ScheduledEvent).catch(console.error)
+handler({} as ScheduledEvent).catch(console.error);

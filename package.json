@@ -6,7 +6,7 @@
 	"repository": "github:atombrenner/aws-lambda-typescript",
 	"type": "module",
 	"scripts": {
-		"test": "jest",
+		"test": "jest src",
 		"test:housekeeping": "tsx src/housekeeping/start.ts",
 		"clean": "rm -rf ./dist",
 		"build": "esbuild --bundle --minify --keep-names --sourcemap --sources-content=false --target=node20 --platform=node --outfile=dist/lambda.js src/lambda.ts",
