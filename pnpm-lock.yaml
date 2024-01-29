@@ -30,9 +30,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.10.4
         version: 7.23.3(@babel/core@7.23.9)
-      '@tsconfig/node20':
-        specifier: ^20.1.2
-        version: 20.1.2
       '@types/adm-zip':
         specifier: ^0.5.0
         version: 0.5.5
@@ -45,6 +42,9 @@ importers:
       '@types/node':
         specifier: ^20.10.0
         version: 20.11.10
+      '@types/react':
+        specifier: ^16.14.56
+        version: 16.14.56
       adm-zip:
         specifier: ^0.5.9
         version: 0.5.10
@@ -7189,10 +7189,6 @@ packages:
 
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
-    dev: true
-
-  /@tsconfig/node20@20.1.2:
-    resolution: {integrity: sha512-madaWq2k+LYMEhmcp0fs+OGaLFk0OenpHa4gmI4VEmCKX4PJntQ6fnnGADVFrVkBj0wIdAlQnK/MrlYTHsa1gQ==}
     dev: true
 
   /@types/adm-zip@0.5.5:
@@ -16134,6 +16130,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: true
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
