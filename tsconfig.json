@@ -25,7 +25,7 @@
 		// "useUnknownInCatchVariables": true,               /* Default catch clause variables as 'unknown' instead of 'any'. */
 		// "alwaysStrict": true,                             /* Ensure 'use strict' is always emitted. */
 		// "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
-		"types": ["node", "jest"],
+		"types": ["node"],
 		"typeRoots": ["core/types", "node_modules/@types"],
 		// "noUnusedParameters": true,                       /* Raise an error when a function parameter isn't read. */
 		// "exactOptionalPropertyTypes": true,               /* Interpret optional property types as written, rather than adding 'undefined'. */
@@ -43,8 +43,6 @@
 		// "noEmit": true /* Disable emitting files from a compilation. */,
 		"removeComments": false,
 		"disableSizeLimit": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
 		"strictNullChecks": true,
 		"pretty": true,
 		"noImplicitAny": false,

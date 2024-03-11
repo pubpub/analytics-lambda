@@ -1,8 +1,8 @@
 function deploy {
   # Generate a version number based on a date timestamp so that it's unique
   TIMESTAMP=$(date +%Y%m%d%H%M%S)
-  cd ../.. &&
-    # Run the npm commands to transpile the TypeScript to JavaScript
+  # Run the npm commands to transpile the TypeScript to JavaScript
+  rm -rf dist &&
     pnpm i &&
     pnpm build &&
     # Create a dist folder and copy only the js files to dist.
@@ -10,10 +10,11 @@ function deploy {
     cd dist &&
     find . -name "*.zip" -type f -delete &&
     # Zip everything in the dist folder and
-    zip -r ../terraform/aws/zips/lambda_function_"$TIMESTAMP".zip . &&
-    cd .. && rm -rf dist &&
+    zip -r lambda_function.zip . &&
+    cd .. &&
+    ls &&
     cd terraform/aws &&
-    terraform plan -input=false -var lambdasVersion="$TIMESTAMP" -out=./tfplan &&
+    terraform plan -input=false -out=./tfplan &&
     terraform apply -input=false ./tfplan
 }
 

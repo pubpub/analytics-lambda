@@ -24,22 +24,34 @@ export async function handler(
 	event: LambdaFunctionUrlEvent,
 	context: Context,
 ): Promise<LambdaFunctionUrlResult> {
-	// console.log(`${event.requestContext.http.method} ${event.rawPath}`);
+	let { body } = event;
+	if (typeof body === 'string') {
+		body = JSON.parse(body);
+	}
 
 	try {
-		analyticsEventSchema.parse(event);
+		analyticsEventSchema.parse(body);
 	} catch (e) {
 		console.log(e);
 
 		return {
 			statusCode: 400,
 			headers: { 'content-type': 'application/json' },
-			body: JSON.stringify(e, null, 2),
+			body: JSON.stringify({ error: e, body }, null, 2),
 		};
 	}
 
 	try {
-		await sendToStitch(event.body);
+		const response = await sendToStitch(body);
+
+		if (!response.ok) {
+			console.error(response.statusText);
+			return {
+				statusCode: response.status,
+				headers: { 'content-type': 'application/json' },
+				body: 'Failed to send to stitch, check the logs for more information.',
+			};
+		}
 
 		return {
 			statusCode: 204,
