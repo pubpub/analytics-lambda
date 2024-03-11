@@ -50,6 +50,7 @@
 		"noImplicitAny": false,
 		"noEmit": true,
 		"jsx": "react",
+		"outDir": "dist",
 		//    "noImplicitAny": true,
 		"paths": {
 			"utils/api/client": ["./core/utils/api/client.ts"],
