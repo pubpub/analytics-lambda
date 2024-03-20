@@ -10,11 +10,11 @@ function deploy {
     cd dist &&
     find . -name "*.zip" -type f -delete &&
     # Zip everything in the dist folder and
-    zip -r lambda_function.zip . &&
+    zip -r lambda_function_${TIMESTAMP}.zip . &&
+    cp lambda_function_${TIMESTAMP}.zip ../terraform/aws/zips &&
     cd .. &&
-    ls &&
     cd terraform/aws &&
-    terraform plan -input=false -out=./tfplan &&
+    terraform plan -input=false -var lambdasVersion="${TIMESTAMP}" -out=./tfplan &&
     terraform apply -input=false ./tfplan
 }
 

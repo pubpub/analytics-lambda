@@ -43,7 +43,7 @@ data "aws_secretsmanager_secret_version" "stitch_webhook_url" {
 
 resource "aws_lambda_function" "pubpub_analytics_lambda" {
   description   = "A super simple lambda that validates an analytics payload and forwards it to stitch"
-  filename      = "../../dist/lambda_function.zip"
+  filename      = "zips/lambda_function_${var.lambdasVersion}.zip"
   function_name = "pubpub_analytics_lambda"
   role          = aws_iam_role.pubpub_analytics_lambda_role.arn
   handler       = "lambda.handler"
