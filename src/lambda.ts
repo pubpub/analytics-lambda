@@ -29,8 +29,9 @@ export async function handler(
 		body = JSON.parse(body);
 	}
 
+	let parsedBody;
 	try {
-		analyticsEventSchema.parse(body);
+		parsedBody = analyticsEventSchema.parse(body);
 	} catch (e) {
 		console.log(e);
 
@@ -42,7 +43,7 @@ export async function handler(
 	}
 
 	try {
-		const response = await sendToStitch(body);
+		const response = await sendToStitch(parsedBody);
 
 		if (!response.ok) {
 			console.error(response.statusText);
