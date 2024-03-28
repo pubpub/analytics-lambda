@@ -27,11 +27,13 @@ resource "aws_iam_role" "pubpub_analytics_lambda_role" {
         Effect = "Allow"
         Principal = {
           Service = "lambda.amazonaws.com"
+
         }
       }
     ]
   })
 }
+
 
 resource "aws_secretsmanager_secret" "stitch_webhook_url" {
   name = "stitch-webhook-url-pubpub-analytics"
@@ -65,3 +67,33 @@ resource "aws_lambda_function_url" "pubpub_analytics_lambda_funtion_url" {
   }
 }
 
+
+resource "aws_cloudwatch_log_group" "pubpub_analytics_lambda_log_group" {
+  name              = "/aws/lambda/${aws_lambda_function.pubpub_analytics_lambda.function_name}"
+  retention_in_days = 7
+  lifecycle {
+    prevent_destroy = false
+  }
+}
+
+resource "aws_iam_policy" "pubpub_analytics_lambda_logging_policy" {
+  name = "pubpub-analytics-lambda-logging-policy"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        Action : [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        Effect : "Allow",
+        Resource : "arn:aws:logs:*:*:*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "pubpub_analyitcs_lamba_logging_policy_attachment" {
+  role       = aws_iam_role.pubpub_analytics_lambda_role.name
+  policy_arn = aws_iam_policy.pubpub_analytics_lambda_logging_policy.arn
+}

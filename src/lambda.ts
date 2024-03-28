@@ -24,7 +24,17 @@ export async function handler(
 	event: LambdaFunctionUrlEvent,
 	context: Context,
 ): Promise<LambdaFunctionUrlResult> {
+	if (event.rawPath === '/health') {
+		return {
+			statusCode: 200,
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({ message: 'ok' }, null, 2),
+		};
+	}
+
 	let { body } = event;
+
+	console.log(event);
 	if (typeof body === 'string') {
 		body = JSON.parse(body);
 	}
