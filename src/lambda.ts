@@ -1,5 +1,6 @@
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2, Context } from 'aws-lambda';
 import { analyticsEventSchema } from 'utils/api/schemas/analytics';
+import { getCountryForTimezone } from 'countries-and-timezones';
 
 type LambdaFunctionUrlEvent = APIGatewayProxyEventV2;
 type LambdaFunctionUrlResult = APIGatewayProxyResultV2;
@@ -53,7 +54,10 @@ export async function handler(
 	}
 
 	try {
-		const response = await sendToStitch(parsedBody);
+		const { timezone } = parsedBody;
+
+		const { name: country = null, id = null } = getCountryForTimezone(timezone) || {};
+		const response = await sendToStitch({ country, countryCode: id, ...parsedBody });
 
 		if (!response.ok) {
 			console.error(response.statusText);

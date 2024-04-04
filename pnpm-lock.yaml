@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      countries-and-timezones:
+        specifier: ^3.6.0
+        version: 3.6.0
     devDependencies:
       '@aws-sdk/client-lambda':
         specifier: ^3.460.0
