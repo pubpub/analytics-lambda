@@ -7,8 +7,7 @@ const config = defineConfig({
 	clean: true,
 	bundle: true,
 	entry: ['src'],
-	minify: true,
-	noExternal: ['crypto-js'],
+	noExternal: ['countries-and-timezones'],
 });
 
 export default config;
